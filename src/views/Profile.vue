@@ -6,6 +6,12 @@
       </template>
     </van-nav-bar>
     <foot></foot>
+    <van-image
+      round
+      width="3rem"
+      height="3rem"
+      src="https://img.yzcdn.cn/vant/cat.jpeg"
+    />
   </div>
 </template>
 <script>

@@ -1,11 +1,11 @@
 import axios from 'axios'
 export function request(config) {
-    const reqInterface = axios.create({
-        baseURL: "https://api.shop.eduwork.cn/",
-        timeout: 5000,
-    })
-    // request interceptor
-    reqInterface.interceptors.request.use(
+  const reqInterface = axios.create({
+    baseURL: "https://api.shop.eduwork.cn/",
+    timeout: 5000,
+  })
+  // request interceptor
+  reqInterface.interceptors.request.use(
     config => {
       if (config.method === 'post') {
         config.data = {
@@ -18,6 +18,10 @@ export function request(config) {
           ...config.params
         }
       }
+      const token = window.localStorage.getItem('token')
+      if (token) {
+        config.headers.Authorization = "Bearer " + token
+      }
       return config
     },
     error => {
@@ -25,6 +29,6 @@ export function request(config) {
       console.log(error) // for debug
       return Promise.reject(error)
     })
-    reqInterface.interceptors.response.use(response => response.data, error => Promise.reject(error))
-    return reqInterface(config)
+  reqInterface.interceptors.response.use(response => response.data, error => Promise.reject(error))
+  return reqInterface(config)
 }

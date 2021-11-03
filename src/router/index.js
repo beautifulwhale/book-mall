@@ -5,6 +5,7 @@ const ShopCart = () => import("../views/ShopCart.vue")
 const Profile = () => import('../views/Profile.vue')
 const Login = () => import("../views/Login.vue")
 const Detail = () => import('../views/Detail.vue')
+const Register = () => import('../views/Register.vue')
 const routes = [
     { path: "/", redirect: "/home" },
     {
@@ -36,13 +37,25 @@ const routes = [
         name: "profile",
         component: Profile,
         meta: {
-            title: '个人中心'
+            title: '个人中心',
+            isAuthorization: true
         }
     },
     {
         path: "/login",
         name: "login",
-        component: Login
+        component: Login,
+        meta: {
+            title: '登录'
+        }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register,
+        meta: {
+            title: '注册 '
+        }
     },
     {
         path: '/detail',
@@ -62,7 +75,12 @@ export const router = createRouter({
 //配置全局导航守卫
 router.beforeEach((to, from, next) => {
     //to and from are Route Object,next() must be called to resolve the hook}
-    next();
+    let token = window.localStorage.getItem('token');
+    if (to.meta.isAuthorization && token == null) {
+        next('/login')
+    } else {
+        next()
+    }
     document.title = to.meta.title
 
 })
