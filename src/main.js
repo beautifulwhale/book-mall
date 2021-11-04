@@ -5,6 +5,7 @@ import 'vant/lib/index.css'
 import './assets/css/base.css'
 import Vant from 'vant'
 import { Lazyload } from 'vant';
+import store from './store/index'
 const app = createApp(App)
 
 
@@ -12,6 +13,6 @@ const app = createApp(App)
 app.use(Lazyload, {
   lazyComponent: true,
 });
-app.use(router).use(Vant)
+app.use(router).use(Vant).use(store)
 app.mount('#app')
 

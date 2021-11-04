@@ -42,20 +42,36 @@
         </div>
       </van-tab>
     </van-tabs>
+    <van-action-bar>
+      <van-action-bar-icon icon="chat-o" text="客服" />
+      <van-action-bar-icon icon="cart-o" text="购物车" @click="lookShopCart" />
+      <van-action-bar-icon icon="shop-o" text="店铺" />
+      <van-action-bar-button
+        type="warning"
+        text="加入购物车"
+        @click="joinShopCart"
+      />
+      <van-action-bar-button type="danger" text="立即购买" />
+    </van-action-bar>
   </div>
 </template>
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { getGoodsDetail } from "../network/detail";
+import { addShopCart } from "../network/shopcart";
 import CommentItem from "../components/CommentItem.vue";
 import GoodsListItem from "../components/GoodsListItem.vue";
 import { ref, reactive, onMounted, toRefs } from "vue";
+import { Toast } from "vant";
+import { useStore } from "vuex";
 export default {
   setup(props) {
     const route = useRoute();
     const router = useRouter();
+    const store = useStore();
     let id = ref(0);
     let active = ref(0);
+    let number = ref("1");
     id = route.query.id;
     let book = reactive({
       detail: {},
@@ -73,7 +89,16 @@ export default {
     const goback = () => {
       router.back();
     };
-    return { goback, ...toRefs(book), active };
+    const joinShopCart = () => {
+      addShopCart(id).then(res => {
+        Toast.success("添加成功");
+        store.dispatch("updateCart");
+      });
+    };
+    const lookShopCart = () => {
+     
+    };
+    return { goback, ...toRefs(book), active, joinShopCart, lookShopCart };
   },
   components: {
     CommentItem,
