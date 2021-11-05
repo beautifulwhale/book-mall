@@ -96,7 +96,7 @@ export default {
       });
     };
     const lookShopCart = () => {
-     
+      router.push("/shopcart");
     };
     return { goback, ...toRefs(book), active, joinShopCart, lookShopCart };
   },

@@ -19,47 +19,125 @@
           <template #origin-price>
             <van-checkbox
               checked-color="#ee0a24"
-              v-model="checked"
+              v-model="item.is_checked"
+              @change="changeChecked"
             ></van-checkbox>
           </template>
           <template #footer>
             <van-stepper
-              v-model="value"
-              input-width="25px"
-              button-size="20px"
+              v-model="item.num"
+              input-width="20px"
+              :min="1"
+              :max="item.goods.stock"
+              theme="round"
+              button-size="20"
+              :name="item.id"
+              disable-input
+              @change="onChange"
             />
           </template>
         </van-card>
         <template #right>
-          <van-button square text="删除" type="danger" class="delete-button" />
+          <van-button
+            square
+            text="删除"
+            type="danger"
+            class="delete-button"
+            @click="deleteCart(item.id)"
+          />
         </template>
       </van-swipe-cell>
     </div>
+    <van-submit-bar
+      :price="totalPrice"
+      button-text="提交订单"
+      @submit="onSubmit"
+    >
+    </van-submit-bar>
   </div>
-  <!-- <div v-else>
-      <van-empty description="购物车中空空如也" />
-      <van-button color="#7232dd" to="home">点此添加</van-button>
-    </div> -->
+  <div v-else>
+    <van-empty description="购物车中空空如也" />
+    <van-button color="hotpink" to="home" block round>点此添加</van-button>
+  </div>
 </template>
 <script>
 import Foot from "../components/Foot.vue";
-import { getCart } from "../network/shopcart";
-import { reactive, onMounted, toRefs, ref } from "vue";
+import {
+  getCart,
+  changeNum,
+  changeCheck,
+  deleteGoods
+} from "../network/shopcart";
+import { reactive, onMounted, toRefs, ref, computed } from "vue";
+import { Toast } from "vant";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   setup(props) {
-    const checked = ref(false);
-    const value = ref(1);
+    const router = useRouter();
+    const store = useStore();
     const shopcart = reactive({
-      list: []
+      list: [],
+      cartIdArray: []
     });
-    onMounted(() => {
+    const allChecked = ref(false);
+    const totalPrice = computed(() => {
+      let sum = 0;
+      shopcart.list
+        .filter(item => {
+          console.log(shopcart.cartIdArray);
+          shopcart.cartIdArray.includes(item.id);
+        })
+        .forEach(element => {
+          sum += parseInt(element.num) * parseFloat(element.goods.price);
+        });
+      console.log(sum);
+      return sum;
+    });
+    const init = () => {
       getCart("include=goods").then(res => {
         shopcart.list = res.data;
+        shopcart.cartIdArray = res.data
+          .filter(n => n.is_checked == 1)
+          .map(item => item.id);
         console.log(res);
       });
+    };
+    onMounted(() => {
+      init();
     });
-    console.log(shopcart.list);
-    return { ...toRefs(shopcart), checked, value };
+    const onChange = (value, detail) => {
+      changeNum(detail.name, value).then(res => {
+        Toast.success("修改成功");
+      });
+    };
+    const changeChecked = isCheck => {
+      changeCheck({ cart_ids: shopcart.cartIdArray }).then(res => {});
+    };
+    const onSubmit = () => {
+      if (shopcart.cartIdArray.length == 0) {
+        Toast.fail("请选择购买的商品");
+        return;
+      } else {
+        router.push("/order");
+      }
+    };
+    const deleteCart = id => {
+      deleteGoods(id).then(res => {
+        Toast.success("删除成功");
+        store.dispatch("updateCart");
+        init();
+      });
+    };
+    return {
+      ...toRefs(shopcart),
+      onChange,
+      totalPrice,
+      allChecked,
+      onSubmit,
+      changeChecked,
+      deleteCart
+    };
   },
   components: {
     Foot
@@ -78,5 +156,10 @@ export default {
 
 .delete-button {
   height: 100%;
+}
+.van-submit-bar {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
 }
 </style>

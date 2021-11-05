@@ -6,6 +6,7 @@ const Profile = () => import('../views/Profile.vue')
 const Login = () => import("../views/Login.vue")
 const Detail = () => import('../views/Detail.vue')
 const Register = () => import('../views/Register.vue')
+const Order = () => import('../views/Order.vue')
 const routes = [
     { path: "/", redirect: "/home" },
     {
@@ -63,6 +64,14 @@ const routes = [
         component: Detail,
         meta: {
             title: '商品详情'
+        }
+    },
+    {
+        path: '/order',
+        name: 'order',
+        component: Order,
+        meta: {
+            title: '支付订单'
         }
     }
 ]
