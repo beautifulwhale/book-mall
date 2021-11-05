@@ -1,7 +1,7 @@
 <template>
   <van-tabbar
     v-model="active"
-    active-color="pink"
+    active-color="hotpink"
     inactive-color="#000"
     @change="onChange"
     route

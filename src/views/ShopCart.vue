@@ -83,15 +83,19 @@ export default {
     const allChecked = ref(false);
     const totalPrice = computed(() => {
       let sum = 0;
-      shopcart.list
+      console.log(shopcart.list)
+      const a = shopcart.list
         .filter(item => {
           console.log(shopcart.cartIdArray);
-          shopcart.cartIdArray.includes(item.id);
+          let b = shopcart.cartIdArray.includes(item.id);
+          console.log(b)
         })
-        .forEach(element => {
-          sum += parseInt(element.num) * parseFloat(element.goods.price);
-        });
-      console.log(sum);
+        console.log(a);
+        // .forEach(element => {
+        //   console.log(element)
+        //   sum += parseInt(element.num) * parseFloat(element.goods.price);
+        //   console.log(sum);
+        // });
       return sum;
     });
     const init = () => {
@@ -100,7 +104,6 @@ export default {
         shopcart.cartIdArray = res.data
           .filter(n => n.is_checked == 1)
           .map(item => item.id);
-        console.log(res);
       });
     };
     onMounted(() => {

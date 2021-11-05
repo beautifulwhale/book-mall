@@ -7,6 +7,11 @@ const Login = () => import("../views/Login.vue")
 const Detail = () => import('../views/Detail.vue')
 const Register = () => import('../views/Register.vue')
 const Order = () => import('../views/Order.vue')
+const Account = () => import('../views/Account.vue')
+const Address = () => import('../views/Address.vue')
+const Collect = () => import('../views/Collect.vue')
+const ChangeName = () => import('../views/ChangeName.vue')
+const ChangeEmail = () => import('../views/ChangeEmail.vue')
 const routes = [
     { path: "/", redirect: "/home" },
     {
@@ -73,6 +78,47 @@ const routes = [
         meta: {
             title: '支付订单'
         }
+    },
+    {
+        path: '/account',
+        name: 'account',
+        component: Account,
+        meta: {
+            title: '账号管理'
+        }
+    },
+    {
+        path: '/address',
+        name: 'address',
+        component: Address,
+        meta: {
+            title: '地址管理'
+        }
+    },
+    {
+        path: '/collect',
+        name: 'collect',
+        component: Collect,
+        meta: {
+            title: '我的收藏'
+        }
+    },
+    {
+        path: '/changename',
+        name: 'changename',
+        component: ChangeName,
+        meta: {
+            title: '修改昵称'
+        }
+    },
+    {
+        path: '/changeemail',
+        name: 'changeemail',
+        component: ChangeEmail,
+        meta: {
+            title: '修改邮箱'
+        }
+
     }
 ]
 
