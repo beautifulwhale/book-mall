@@ -1,6 +1,6 @@
 <template>
   <van-nav-bar
-    title="标题"
+    title="修改邮箱"
     right-text="确定"
     border
     left-arrow

@@ -12,6 +12,9 @@ const Address = () => import('../views/Address.vue')
 const Collect = () => import('../views/Collect.vue')
 const ChangeName = () => import('../views/ChangeName.vue')
 const ChangeEmail = () => import('../views/ChangeEmail.vue')
+const AddAddress = () => import('../views/AddAddress.vue')
+const EditAddress = () => import('../views/EditAddress.vue')
+
 const routes = [
     { path: "/", redirect: "/home" },
     {
@@ -118,7 +121,22 @@ const routes = [
         meta: {
             title: '修改邮箱'
         }
-
+    },
+    {
+        path: '/addaddress',
+        name: 'addaddress',
+        component: AddAddress,
+        meta: {
+            title: '新增地址'
+        }
+    },
+    {
+        path: '/editaddress',
+        name: 'editaddress',
+        component: EditAddress,
+        meta: {
+            title: '编辑地址'
+        }
     }
 ]
 
