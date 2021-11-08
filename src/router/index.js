@@ -14,6 +14,7 @@ const ChangeName = () => import('../views/ChangeName.vue')
 const ChangeEmail = () => import('../views/ChangeEmail.vue')
 const AddAddress = () => import('../views/AddAddress.vue')
 const EditAddress = () => import('../views/EditAddress.vue')
+const OrderDetail = ()=>import('../views/OrderDetail.vue')
 
 const routes = [
     { path: "/", redirect: "/home" },
@@ -136,6 +137,14 @@ const routes = [
         component: EditAddress,
         meta: {
             title: '编辑地址'
+        }
+    },
+    {
+        path: '/orderdetail',
+        name: 'orderdetail',
+        component: OrderDetail,
+        meta: {
+            title: '订单详情'
         }
     }
 ]

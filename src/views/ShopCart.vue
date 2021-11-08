@@ -165,4 +165,9 @@ export default {
   bottom: 50px;
   left: 0;
 }
+.shopcart{
+  width: 100%;
+  height: 550px;
+  overflow: scroll;
+}
 </style>
