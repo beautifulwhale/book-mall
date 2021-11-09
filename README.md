@@ -15,5 +15,8 @@ npm run dev 启动
 https://blog.csdn.net/qq_20179227/article/details/104031998?ops_request_misc=&request_id=&biz_id=102&utm_term=%E6%B2%99%E7%AE%B1%E7%89%88%E6%94%AF%E4%BB%98%E5%AE%9D%E4%B8%8B%E8%BD%BD&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-4-104031998.first_rank_v2_pc_rank_v29&spm=1018.2226.3001.4187
 在我用沙箱支付宝支付之后然后订单状态还是处于1的刚下单状态   当我再次点支付显示支付二维码的时候  手机上显示的是已经支付的订单不允许二次支付  按照道理来讲应该是状态已经改变了啊
 这是我没有解决的一个bug，希望可以得到大家指教
+
+最后接口文档在这里:https://www.showdoc.com.cn/1207745568269674/6094279351627422
+
  
  
