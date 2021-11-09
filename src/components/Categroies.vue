@@ -40,9 +40,7 @@ export default {
       emit("cateClick", index.name);
     };
     let active = ref(0);
-
- 
-    return { active, onClickTab};
+    return { active, onClickTab };
   },
   components: {
     GoodsListItem

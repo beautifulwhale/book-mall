@@ -43,9 +43,9 @@
       </van-tab>
     </van-tabs>
     <van-action-bar>
-      <van-action-bar-icon icon="chat-o" text="客服" />
+      <van-action-bar-icon icon="chat-o" text="客服" @click="kefuClick" />
       <van-action-bar-icon icon="cart-o" text="购物车" @click="lookShopCart" />
-      <van-action-bar-icon icon="shop-o" text="店铺" />
+      <van-action-bar-icon icon="star-o" text="收藏" @click="collect" />
       <van-action-bar-button
         type="warning"
         text="加入购物车"
@@ -57,7 +57,7 @@
 </template>
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { getGoodsDetail } from "../network/detail";
+import { getGoodsDetail, collectGoods } from "../network/detail";
 import { addShopCart } from "../network/shopcart";
 import CommentItem from "../components/CommentItem.vue";
 import GoodsListItem from "../components/GoodsListItem.vue";
@@ -83,7 +83,6 @@ export default {
         book.detail = res.goods;
         book.comments = res.goods.comments;
         book.likeBooks = res.like_goods;
-        console.log(res);
       });
     });
     const goback = () => {
@@ -98,7 +97,22 @@ export default {
     const lookShopCart = () => {
       router.push("/shopcart");
     };
-    return { goback, ...toRefs(book), active, joinShopCart, lookShopCart };
+    const kefuClick = () => {
+      Toast.fail("暂时未开放客服");
+    };
+    const collect = async () => {
+      const res = await collectGoods(id);
+      Toast.success("收藏成功");
+    };
+    return {
+      goback,
+      ...toRefs(book),
+      active,
+      joinShopCart,
+      lookShopCart,
+      kefuClick,
+      collect
+    };
   },
   components: {
     CommentItem,

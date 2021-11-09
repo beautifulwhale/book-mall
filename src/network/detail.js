@@ -6,3 +6,18 @@ export function getGoodsDetail(good) {
         method: "get",
     })
 }
+
+//收藏商品
+export function collectGoods(goods) {
+    return request({
+        url: `/api/collects/goods/${goods}`,
+        method: "POST",
+    })
+}
+
+//我的收藏
+export function myCollect() {
+    return request({
+        url: "/api/collects",
+    })
+}

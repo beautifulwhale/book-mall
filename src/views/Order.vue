@@ -116,6 +116,7 @@ export default {
           const status = await getPayStatus(orderInfo.orderId);
           if (status == 2) {
             clearInterval(timer);
+            orderInfo.showPay = false;
             router.push({ path: "/orderdetail", query: { id: res.id } });
           }
         }, 2000);

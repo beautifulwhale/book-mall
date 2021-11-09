@@ -124,10 +124,11 @@ export default {
       const payResult = await getPay(order.orderInfo.id, "aliyun");
       order.payUrl = "https://api.shop.eduwork.cn" + payResult.qr_code_url;
       let timer = setInterval(async () => {
-        const result = await getPayStatus(order.orderInfo.id);
-        if (result == 2) {
+        const result = await getPayStatus(orderId);
+        console.log(result);
+        if (result == '2') {
           clearInterval(timer);
-          console.log("牛逼");
+          init();
         }
       }, 2000);
     };

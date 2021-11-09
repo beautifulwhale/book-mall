@@ -60,7 +60,7 @@ export default {
     };
 
     let bscroll = reactive({});
-    onMounted(() => {
+    // onMounted(() => {
       // let bscroll = new BScroll(document.querySelector(".wraper"), {
       //   click: true,
       //   pullUpLoad: true, //上拉加载更多
@@ -72,7 +72,7 @@ export default {
       // bscroll.on("pullingUp", () => {
       //   console.log("上拉加载更多");
       // });
-    });
+    // });
     //监听任何变量
     // watchEffect(() => {
     //   nextTick(() => {
@@ -112,16 +112,6 @@ export default {
     width: 100%;
     background-color: hotpink;
   }
-  // .wraper {
-  //   width: 100%;
-  //   // height: cale(100vh-96px);
-  //   position: absolute;
-  //   top: 0px;
-  //   bottom: 0px;
-  //   left: 0;
-  //   right: 0;
-  //   overflow: hidden;
-  // }
   .content {
     position: absolute;
     top: 0px;

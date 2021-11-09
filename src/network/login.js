@@ -1,5 +1,5 @@
 import { request } from './request'
-//获取所有的商品列表
+//登录
 export function loginUser(email, password) {
     return request({
         url: "/api/auth/login",
@@ -8,5 +8,13 @@ export function loginUser(email, password) {
             email,
             password
         }
+    })
+}
+
+//退出登录
+export function logOut() {
+    return request({
+        url: "/api/auth/logout",
+        method: "post",
     })
 }

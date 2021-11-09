@@ -14,8 +14,8 @@ const ChangeName = () => import('../views/ChangeName.vue')
 const ChangeEmail = () => import('../views/ChangeEmail.vue')
 const AddAddress = () => import('../views/AddAddress.vue')
 const EditAddress = () => import('../views/EditAddress.vue')
-const OrderDetail = ()=>import('../views/OrderDetail.vue')
-
+const OrderDetail = () => import('../views/OrderDetail.vue')
+const MyOrder = () => import('../views/MyOrder.vue')
 const routes = [
     { path: "/", redirect: "/home" },
     {
@@ -72,7 +72,8 @@ const routes = [
         name: 'detail',
         component: Detail,
         meta: {
-            title: '商品详情'
+            title: '商品详情',
+            isAuthorization: true
         }
     },
     {
@@ -80,7 +81,8 @@ const routes = [
         name: 'order',
         component: Order,
         meta: {
-            title: '支付订单'
+            title: '支付订单',
+            isAuthorization: true
         }
     },
     {
@@ -88,7 +90,7 @@ const routes = [
         name: 'account',
         component: Account,
         meta: {
-            title: '账号管理'
+            title: '账号管理',
         }
     },
     {
@@ -96,7 +98,8 @@ const routes = [
         name: 'address',
         component: Address,
         meta: {
-            title: '地址管理'
+            title: '地址管理',
+            isAuthorization: true
         }
     },
     {
@@ -104,7 +107,9 @@ const routes = [
         name: 'collect',
         component: Collect,
         meta: {
-            title: '我的收藏'
+            title: '我的收藏',
+            isAuthorization: true
+
         }
     },
     {
@@ -112,7 +117,9 @@ const routes = [
         name: 'changename',
         component: ChangeName,
         meta: {
-            title: '修改昵称'
+            title: '修改昵称',
+            isAuthorization: true
+
         }
     },
     {
@@ -120,7 +127,9 @@ const routes = [
         name: 'changeemail',
         component: ChangeEmail,
         meta: {
-            title: '修改邮箱'
+            title: '修改邮箱',
+            isAuthorization: true
+
         }
     },
     {
@@ -128,7 +137,9 @@ const routes = [
         name: 'addaddress',
         component: AddAddress,
         meta: {
-            title: '新增地址'
+            title: '新增地址',
+            isAuthorization: true
+
         }
     },
     {
@@ -136,7 +147,9 @@ const routes = [
         name: 'editaddress',
         component: EditAddress,
         meta: {
-            title: '编辑地址'
+            title: '编辑地址',
+            isAuthorization: true
+
         }
     },
     {
@@ -144,7 +157,18 @@ const routes = [
         name: 'orderdetail',
         component: OrderDetail,
         meta: {
-            title: '订单详情'
+            title: '订单详情',
+            isAuthorization: true
+
+        }
+    },
+    {
+        path: '/myorder',
+        name: 'myorder',
+        component: MyOrder,
+        meta: {
+            title: '我的订单',
+            isAuthorization: true
         }
     }
 ]

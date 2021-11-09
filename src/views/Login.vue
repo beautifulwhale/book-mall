@@ -55,7 +55,6 @@ export default {
     });
     const onSubmit = () => {
       loginUser(loginInfo.email, loginInfo.password).then(res => {
-        console.log(res);
         //保存token
         window.localStorage.setItem("token", res.access_token);
         Toast.success("登录成功!");

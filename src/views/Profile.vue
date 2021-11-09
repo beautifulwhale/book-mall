@@ -6,7 +6,7 @@
   </van-nav-bar>
   <foot></foot>
   <!-- 个人主页 -->
-  <div class="profile" @click="goAccount">
+  <div class="profile">
     <div class="avatar">
       <van-image
         round
@@ -14,25 +14,39 @@
         height="3rem"
         :src="user.avatar_url"
         lazy-load
+        @click="goAccount"
       />
     </div>
-    <div class="user">
+    <div class="user" v-if="Object.keys(user).length !== 0">
       <div>{{ user.name }}</div>
       <div>邮箱:{{ user.email }}</div>
     </div>
+    <div class="goLogin" v-else @click="goLogin">
+      登录/注册
+    </div>
   </div>
   <van-cell title="我的收藏" is-link to="collect" />
-  <van-cell title="我的订单" is-link to="order" />
+  <van-cell title="我的订单" is-link to="myorder" />
   <van-cell title="账号管理" is-link to="account" />
   <van-cell title="地址管理" is-link to="address" />
-  <van-cell title="关于我们" is-link />
-  <van-button color="hotpink" block round>退出登录</van-button>
+  <van-cell title="关于我们" is-link @click="aboutus" />
+  <van-button
+    color="hotpink"
+    block
+    round
+    @click="logout"
+    v-if="Object.keys(user).length !== 0"
+    >退出登录</van-button
+  >
 </template>
 <script>
 import Foot from "../components/Foot.vue";
 import { getUser } from "../network/user";
+import { logOut } from "../network/login";
 import { reactive, onMounted, toRefs } from "vue";
 import { useRouter } from "vue-router";
+import { Toast } from "vant";
+import { Dialog } from "vant";
 export default {
   setup(props) {
     let userInfo = reactive({ user: {} });
@@ -48,7 +62,28 @@ export default {
     const goAccount = () => {
       router.push("/account");
     };
-    return { ...toRefs(userInfo), goAccount };
+    const aboutus = () => {
+      Toast.fail("暂时未开放此功能");
+    };
+    const logout = () => {
+      Dialog.confirm({
+        title: "退出",
+        message: "是否退出登录?"
+      })
+        .then(async () => {
+          const res = await logOut();
+          init();
+          router.go(0);
+          Toast.success("退出登录成功");
+        })
+        .catch(() => {
+          Toast.success("不退出是明智的选择");
+        });
+    };
+    const goLogin = () => {
+      router.push("/login");
+    };
+    return { ...toRefs(userInfo), goAccount, aboutus, logout, goLogin };
   },
   components: {
     Foot
@@ -81,6 +116,12 @@ export default {
     div:nth-child(2) {
       font-size: 13px;
     }
+  }
+  .goLogin {
+    font-size: 15px;
+    font-weight: bolder;
+    color: black;
+    line-height: 40px;
   }
 }
 .van-cell {

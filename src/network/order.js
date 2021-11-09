@@ -37,11 +37,14 @@ export function orderDetail(order) {
   include	否	string	包含额外的数据： goods 商品，user 用户 ，orderDetails订单详情 
  *
  */
-export function orderList(params) {
+export function orderList(page, status) {
     return request({
         url: `/api/orders`,
         method: "get",
-        params
+        params: {
+            page, status,
+            include: 'user,orderDetails.goods'
+        }
     })
 }
 

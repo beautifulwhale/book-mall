@@ -49,7 +49,7 @@
       </van-swipe-cell>
     </div>
     <van-submit-bar
-      :price="totalPrice"
+      :price="totalPrice*100"
       button-text="提交订单"
       @submit="onSubmit"
     >
@@ -83,19 +83,9 @@ export default {
     const allChecked = ref(false);
     const totalPrice = computed(() => {
       let sum = 0;
-      console.log(shopcart.list)
-      const a = shopcart.list
-        .filter(item => {
-          console.log(shopcart.cartIdArray);
-          let b = shopcart.cartIdArray.includes(item.id);
-          console.log(b)
-        })
-        console.log(a);
-        // .forEach(element => {
-        //   console.log(element)
-        //   sum += parseInt(element.num) * parseFloat(element.goods.price);
-        //   console.log(sum);
-        // });
+      shopcart.list.forEach(element => {
+        sum += parseInt(element.num) * parseFloat(element.goods.price);
+      });
       return sum;
     });
     const init = () => {
@@ -165,7 +155,7 @@ export default {
   bottom: 50px;
   left: 0;
 }
-.shopcart{
+.shopcart {
   width: 100%;
   height: 550px;
   overflow: scroll;
