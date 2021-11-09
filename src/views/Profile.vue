@@ -17,7 +17,7 @@
         @click="goAccount"
       />
     </div>
-    <div class="user" v-if="Object.keys(user).length !== 0">
+    <div class="user" v-if="Object.keys(user).length !== 0" @click="goAccount">
       <div>{{ user.name }}</div>
       <div>邮箱:{{ user.email }}</div>
     </div>

@@ -91,6 +91,7 @@ const routes = [
         component: Account,
         meta: {
             title: '账号管理',
+            isAuthorization: true
         }
     },
     {
